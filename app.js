@@ -18,15 +18,15 @@ const { httpLogger, appLogger } = require("./config/logger");
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Set up rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: "draft-7",
-  legacyHeaders: false,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+//   standardHeaders: "draft-7",
+//   legacyHeaders: false,
+// });
 
-// Apply the rate limiter to all requests
-app.use(limiter);
+// // Apply the rate limiter to all requests
+// app.use(limiter);
 // Use Helmet!
 app.use(helmet());
 
