@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,3 +12,55 @@ model Admin {
     email        String    @unique
     password     String
 }
+
+model User {
+  id                String   @id @default(uuid())
+  username          String   @unique
+  image             String?
+  password          String
+  fullName          String?
+  fatherName        String?
+  gender            String?
+  age               Int? 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relation to Panchayat
+  panchayatId       String?  // foreign key to Panchayat
+  panchayat         Panchayat? @relation(fields: [panchayatId], references: [id])
+}
+
+model Panchayat {
+  id                        String   @id @default(uuid())
+  name                      String   @unique
+  numberOfHabitations       Int?
+  libraryCess               String?
+  waterCess                 String?
+  lightingCess              String?
+  drainageCess              String?
+  sportsCess                String?
+  fireCess                  String?
+
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+  
+  // Relation to Mandal
+  mandalId                  String?  // foreign key to Mandal
+  mandal                    Mandal?  @relation(fields: [mandalId], references: [id])
+  
+  // Relation to Users (list of users belonging to this Panchayat)
+  users                     User[]
+}
+
+model Mandal {
+  id                        String   @id @default(uuid())
+  name                      String
+  numberOfGramaPanchayati   Int?
+
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+  
+  // Relation to Panchayats (list of Panchayats belonging to this Mandal)
+  panchayats                Panchayat[]
+}
+
