@@ -1,13 +1,6 @@
 /**
  * @swagger
- * tags:
- *   name: User
- *   description: User management and authentication
- */
-
-/**
- * @swagger
- * /v1/register:
+ * /api/user/v1/register:
  *   post:
  *     summary: Register a new user
  *     tags: [User]
@@ -41,7 +34,7 @@
  *                 description: The user's age
  *               panchayatId:
  *                 type: string
- *                 description: The ID of the panchayat the user belongs to
+ *                 description: The ID of the Panchayat the user belongs to
  *     responses:
  *       201:
  *         description: User registered successfully
@@ -67,28 +60,15 @@
  *                           example: "12345"
  *                         username:
  *                           type: string
- *                           example: "johndoe"
+ *                           example: test_user
  *                     token:
  *                       type: string
- *                       example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
- *       400:
- *         description: Bad request
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
- *                 message:
- *                   type: string
- *                   example: Username and password are required
+ *                       example: JWT_token_here
  */
 
 /**
  * @swagger
- * /v1/login:
+ * /api/user/v1/login:
  *   post:
  *     summary: Login a user
  *     tags: [User]
@@ -133,37 +113,24 @@
  *                           example: "12345"
  *                         username:
  *                           type: string
- *                           example: "johndoe"
+ *                           example: test_user
  *                     token:
  *                       type: string
- *                       example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
- *       401:
- *         description: Invalid username or password
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
- *                 message:
- *                   type: string
- *                   example: Invalid username or password
+ *                       example: JWT_token_here
  */
 
 /**
  * @swagger
- * /v1/getUser/{id}:
+ * /api/user/v1/getUser/{id}:
  *   get:
- *     summary: Get user by ID
+ *     summary: Get a user by ID
  *     tags: [User]
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         schema:
  *           type: string
+ *         required: true
  *         description: The user ID
  *     responses:
  *       200:
@@ -187,24 +154,46 @@
  *                       example: "12345"
  *                     username:
  *                       type: string
- *                       example: "johndoe"
- *                     fullName:
- *                       type: string
- *                       example: "John Doe"
- *                     fatherName:
- *                       type: string
- *                       example: "James Doe"
- *                     gender:
- *                       type: string
- *                       example: "Male"
- *                     age:
- *                       type: integer
- *                       example: 30
- *                     panchayatId:
- *                       type: string
- *                       example: "67890"
- *       404:
- *         description: User not found
+ *                       example: test_user
+ */
+
+/**
+ * @swagger
+ * /api/user/v1/updateUser/{id}:
+ *   put:
+ *     summary: Update a user by ID
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               fullName:
+ *                 type: string
+ *               fatherName:
+ *                 type: string
+ *               gender:
+ *                 type: string
+ *               age:
+ *                 type: integer
+ *               panchayatId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -212,10 +201,95 @@
  *               properties:
  *                 success:
  *                   type: boolean
- *                   example: false
+ *                   example: true
  *                 message:
  *                   type: string
- *                   example: User not found
+ *                   example: User updated successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       example: "12345"
+ *                     username:
+ *                       type: string
+ *                       example: updated_username
  */
 
-// ... (similar documentation for updateUser, deleteUser, and getUsers endpoints)
+/**
+ * @swagger
+ * /api/user/v1/deleteUser/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User deleted successfully
+ */
+
+/**
+ * @swagger
+ * /api/user/v1/getUsers:
+ *   get:
+ *     summary: Get all users with pagination
+ *     tags: [User]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of items per page
+ *       - in: query
+ *         name: query
+ *         schema:
+ *           type: string
+ *         description: Search query for username or other fields
+ *     responses:
+ *       200:
+ *         description: Users retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Users retrieved successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: "12345"
+ *                       username:
+ *                         type: string
+ *                         example: test_user
+ */

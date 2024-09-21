@@ -1,13 +1,6 @@
 /**
  * @swagger
- * tags:
- *   name: Mandal
- *   description: Mandal management
- */
-
-/**
- * @swagger
- * /v1/createMandal:
+ * /api/mandal/v1/createMandal:
  *   post:
  *     summary: Create a new Mandal
  *     tags: [Mandal]
@@ -19,14 +12,13 @@
  *             type: object
  *             required:
  *               - name
- *               - numberOfGramaPanchayati
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the Mandal
+ *                 description: The Mandal name
  *               numberOfGramaPanchayati:
  *                 type: integer
- *                 description: The number of Grama Panchayats in the Mandal
+ *                 description: Number of Grama Panchayats in the Mandal
  *     responses:
  *       201:
  *         description: Mandal created successfully
@@ -49,37 +41,21 @@
  *                       example: "12345"
  *                     name:
  *                       type: string
- *                       example: "Sample Mandal"
- *                     numberOfGramaPanchayati:
- *                       type: integer
- *                       example: 5
- *       400:
- *         description: Bad request
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
- *                 message:
- *                   type: string
- *                   example: Name and numberOfGramaPanchayati are required
+ *                       example: "Mandal Name"
  */
 
 /**
  * @swagger
- * /v1/getMandal/{id}:
+ * /api/mandal/v1/getMandal/{id}:
  *   get:
- *     summary: Get Mandal by ID
+ *     summary: Get a Mandal by ID
  *     tags: [Mandal]
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         schema:
  *           type: string
+ *         required: true
  *         description: The Mandal ID
  *     responses:
  *       200:
@@ -103,12 +79,36 @@
  *                       example: "12345"
  *                     name:
  *                       type: string
- *                       example: "Sample Mandal"
- *                     numberOfGramaPanchayati:
- *                       type: integer
- *                       example: 5
- *       404:
- *         description: Mandal not found
+ *                       example: "Mandal Name"
+ */
+
+/**
+ * @swagger
+ * /api/mandal/v1/updateMandal/{id}:
+ *   put:
+ *     summary: Update a Mandal by ID
+ *     tags: [Mandal]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The Mandal ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               numberOfGramaPanchayati:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Mandal updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -116,10 +116,95 @@
  *               properties:
  *                 success:
  *                   type: boolean
- *                   example: false
+ *                   example: true
  *                 message:
  *                   type: string
- *                   example: Mandal not found
+ *                   example: Mandal updated successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       example: "12345"
+ *                     name:
+ *                       type: string
+ *                       example: "Updated Mandal Name"
  */
 
-// ... (similar documentation for updateMandal, deleteMandal, and getAllMandals endpoints)
+/**
+ * @swagger
+ * /api/mandal/v1/deleteMandal/{id}:
+ *   delete:
+ *     summary: Delete a Mandal by ID
+ *     tags: [Mandal]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The Mandal ID
+ *     responses:
+ *       200:
+ *         description: Mandal deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Mandal deleted successfully
+ */
+
+/**
+ * @swagger
+ * /api/mandal/v1/getAllMandals:
+ *   get:
+ *     summary: Get all Mandals with pagination
+ *     tags: [Mandal]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of items per page
+ *       - in: query
+ *         name: query
+ *         schema:
+ *           type: string
+ *         description: Search query
+ *     responses:
+ *       200:
+ *         description: Mandals retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Mandals retrieved successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: "12345"
+ *                       name:
+ *                         type: string
+ *                         example: "Mandal Name"
+ */
