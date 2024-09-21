@@ -111,15 +111,30 @@ exports.updateUserById = async (req, res, next) => {
   const { username, password, fullName, fatherName, gender, age, panchayatId } = req.body;
 
   try {
-    const updatedUser = await User.updateById(id, {
-      username,
-      password,
-      fullName,
-      fatherName,
-      gender,
-      age,
-      panchayatId,
-    });
+    // Create an update object and only add the fields that are provided in the request body
+    const updateData = {};
+
+    if (username) updateData.username = username;
+    if (password) updateData.password = password; // Consider hashing the password before updating
+    if (fullName) updateData.fullName = fullName;
+    if (fatherName) updateData.fatherName = fatherName;
+    if (gender) updateData.gender = gender;
+    if (age) updateData.age = age;
+
+    // Handle the relation update for panchayat
+    if (panchayatId) {
+      updateData.panchayat = {
+        connect: { id: panchayatId },
+      };
+    }
+
+    // If no fields are provided, return an error
+    if (Object.keys(updateData).length === 0) {
+      throw new CustomError('No fields provided for update', 400);
+    }
+
+    // Update the user in the database
+    const updatedUser = await User.updateById(id, updateData);
 
     res.status(200).json(response(200, true, 'User updated successfully', updatedUser));
   } catch (error) {
@@ -133,10 +148,15 @@ exports.deleteUserById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedUser = await User.deleteById(id);
-    if (!deletedUser) {
+    // Check if the user exists before deleting it
+    const user = await User.findById(id);
+    if (!user) {
       throw new CustomError('User not found', 404);
     }
+
+    // Delete the user from the database
+    // Note: This will also delete any related documents (e.g., panchayats) in other collections
+    await User.deleteById(id);
 
     res.status(200).json(response(200, true, 'User deleted successfully'));
   } catch (error) {

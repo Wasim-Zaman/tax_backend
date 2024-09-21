@@ -15,6 +15,19 @@ class User {
     }
   }
 
+  static async findByUsername(username) {
+    try {
+      return await prisma.user.findUnique({
+        where: {
+          username: username,
+        },
+      });
+    } catch (error) {
+      console.error('Error finding user by username:', error);
+      throw error;
+    }
+  }
+
   static async create(data) {
     try {
       console.log(`Creating user with data: ${JSON.stringify(data)}`);
@@ -44,17 +57,22 @@ class User {
   static async updateById(id, data) {
     try {
       console.log(`Updating user with ID ${id} and data: ${JSON.stringify(data)}`);
+
+      // Create the update data object
+      const updateData = { ...data };
+
+      // Check if panchayatId exists, and if so, handle the relation update
+      if (data.panchayatId) {
+        updateData.panchayat = {
+          connect: { id: data.panchayatId },
+        };
+        delete updateData.panchayatId; // Remove panchayatId after processing it
+      }
+
       return await prisma.user.update({
         where: { id: id },
-        data: {
-          ...data,
-          panchayat: data.panchayatId
-            ? {
-                connect: { id: data.panchayatId }, // Update Panchayat relation
-              }
-            : undefined,
-        },
-        include: { panchayat: true },
+        data: updateData,
+        include: { panchayat: true }, // Include Panchayat relation in the response
       });
     } catch (error) {
       console.error(`Error updating user with id ${id}:`, error.message);
