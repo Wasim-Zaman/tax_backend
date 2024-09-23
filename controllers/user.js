@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Panchayat = require('../models/panchayat');
 const CustomError = require('../utils/error');
 const response = require('../utils/response');
 const JWT = require('../utils/jwt');
@@ -22,6 +23,7 @@ exports.register = async (req, res, next) => {
     // Hash the password
     const hashedPassword = await Bcrypt.createPassword(password);
 
+    // Create the new user
     const newUser = await User.create({
       username,
       password: hashedPassword,
@@ -31,6 +33,15 @@ exports.register = async (req, res, next) => {
       age,
       panchayatId,
     });
+
+    // Add the user to the Panchayat if panchayatId is provided
+    if (panchayatId) {
+      await Panchayat.updateById(panchayatId, {
+        users: {
+          connect: { id: newUser.id }, // Connect the newly created user to the Panchayat
+        },
+      });
+    }
 
     // Create a JWT token for the newly registered user
     const token = JWT.createToken(newUser);
