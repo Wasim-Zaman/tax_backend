@@ -4,6 +4,8 @@
  *   post:
  *     summary: Create a new PanchayatiProfile
  *     tags: [PanchayatiProfile]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -80,12 +82,14 @@
 
 /**
  * @swagger
- * /api/panchayatiProfile/v1/getPanchayatiProfileByUserId/{userId}:
+ * /api/panchayatiProfile/v1/getPanchayatiProfileByUserId:
  *   get:
  *     summary: Get PanchayatiProfile by User ID
  *     tags: [PanchayatiProfile]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: userId
  *         schema:
  *           type: string
