@@ -28,8 +28,6 @@ exports.createPanchayatiProfile = async (req, res, next) => {
       sanitationMaterials,
       panchayatiShops,
       otherAssets,
-      userId,
-      panchayatId,
     } = req.body;
 
     const newPanchayatiProfile = await PanchayatiProfile.create({
@@ -68,10 +66,8 @@ exports.createPanchayatiProfile = async (req, res, next) => {
 
 // Get PanchayatiProfile by User ID
 exports.getPanchayatiProfileByUserId = async (req, res, next) => {
-  const { userId } = req.params;
-
   try {
-    const panchayatiProfiles = await PanchayatiProfile.findByUserId(userId);
+    const panchayatiProfiles = await PanchayatiProfile.findByUserId(req.user.id);
 
     if (!panchayatiProfiles.length) {
       throw new CustomError('No PanchayatiProfile found for the given userId', 404);

@@ -1,14 +1,16 @@
 const express = require('express');
-const panchayatiProfileController = require('../controllers/panchayatiProfile');
+const controller = require('../controllers/panchayatiProfile');
+
+const isAuth = require('../middleware/isAuth');
 
 const router = express.Router();
 
 // Version 1 routes for PanchayatiProfile
-router.post('/v1/createPanchayatiProfile', panchayatiProfileController.createPanchayatiProfile);
-router.get('/v1/getPanchayatiProfile/:id', panchayatiProfileController.getPanchayatiProfileById);
-router.put('/v1/updatePanchayatiProfile/:id', panchayatiProfileController.updatePanchayatiProfileById);
-router.delete('/v1/deletePanchayatiProfile/:id', panchayatiProfileController.deletePanchayatiProfileById);
-router.get('/v1/getAllPanchayatiProfiles', panchayatiProfileController.getPanchayatiProfiles);
-router.get('/v1/getPanchayatiProfileByUserId/:userId', panchayatiProfileController.getPanchayatiProfileByUserId);
+router.post('/v1/createPanchayatiProfile', isAuth, controller.createPanchayatiProfile);
+router.get('/v1/getPanchayatiProfile/:id', controller.getPanchayatiProfileById);
+router.put('/v1/updatePanchayatiProfile/:id', controller.updatePanchayatiProfileById);
+router.delete('/v1/deletePanchayatiProfile/:id', controller.deletePanchayatiProfileById);
+router.get('/v1/getAllPanchayatiProfiles', controller.getPanchayatiProfiles);
+router.get('/v1/getPanchayatiProfileByUserId', isAuth, controller.getPanchayatiProfileByUserId);
 
 module.exports = router;
