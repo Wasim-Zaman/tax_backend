@@ -66,6 +66,24 @@ exports.createPanchayatiProfile = async (req, res, next) => {
   }
 };
 
+// Get PanchayatiProfile by User ID
+exports.getPanchayatiProfileByUserId = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const panchayatiProfiles = await PanchayatiProfile.findByUserId(userId);
+
+    if (!panchayatiProfiles.length) {
+      throw new CustomError('No PanchayatiProfile found for the given userId', 404);
+    }
+
+    res.status(200).json(response(200, true, 'PanchayatiProfile found successfully', panchayatiProfiles));
+  } catch (error) {
+    console.log(`Error in getPanchayatiProfileByUserId: ${error.message}`);
+    next(error);
+  }
+};
+
 // Get PanchayatiProfile by ID
 exports.getPanchayatiProfileById = async (req, res, next) => {
   const { id } = req.params;

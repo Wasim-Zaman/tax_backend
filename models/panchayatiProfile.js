@@ -16,6 +16,19 @@ class PanchayatiProfile {
     }
   }
 
+  //    Find by user id
+  static async findByUserId(userId) {
+    try {
+      return await prisma.panchayatiProfile.findMany({
+        where: { userId: userId },
+        include: { user: true, panchayat: true }, // Include related User and Panchayat data
+      });
+    } catch (error) {
+      console.error('Error finding PanchayatiProfile by userId:', error);
+      throw error;
+    }
+  }
+
   // Create PanchayatiProfile
   static async create(data) {
     try {

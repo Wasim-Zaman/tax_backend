@@ -80,6 +80,46 @@
 
 /**
  * @swagger
+ * /api/panchayatiProfile/v1/getPanchayatiProfileByUserId/{userId}:
+ *   get:
+ *     summary: Get PanchayatiProfile by User ID
+ *     tags: [PanchayatiProfile]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     responses:
+ *       200:
+ *         description: PanchayatiProfile found successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: PanchayatiProfile found successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: "12345"
+ *                       area:
+ *                         type: string
+ *                         example: "Area Name"
+ */
+
+/**
+ * @swagger
  * /api/panchayatiProfile/v1/getPanchayatiProfile/{id}:
  *   get:
  *     summary: Get a PanchayatiProfile by ID

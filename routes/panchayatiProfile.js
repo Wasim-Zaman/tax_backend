@@ -9,5 +9,6 @@ router.get('/v1/getPanchayatiProfile/:id', panchayatiProfileController.getPancha
 router.put('/v1/updatePanchayatiProfile/:id', panchayatiProfileController.updatePanchayatiProfileById);
 router.delete('/v1/deletePanchayatiProfile/:id', panchayatiProfileController.deletePanchayatiProfileById);
 router.get('/v1/getAllPanchayatiProfiles', panchayatiProfileController.getPanchayatiProfiles);
+router.get('/v1/getPanchayatiProfileByUserId/:userId', panchayatiProfileController.getPanchayatiProfileByUserId);
 
 module.exports = router;
