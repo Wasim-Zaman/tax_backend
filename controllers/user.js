@@ -90,6 +90,7 @@ exports.login = async (req, res, next) => {
         user: {
           id: user.id,
           username: user.username,
+          panchayatId: user.panchayatId,
         },
         token,
       })

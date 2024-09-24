@@ -55,8 +55,8 @@ exports.createPanchayatiProfile = async (req, res, next) => {
       sanitationMaterials,
       panchayatiShops,
       otherAssets,
-      userId,
-      panchayatId,
+      userId: req.user.id,
+      panchayatId: req.user.panchayatId,
     });
 
     res.status(201).json(response(201, true, 'PanchayatiProfile created successfully', newPanchayatiProfile));
