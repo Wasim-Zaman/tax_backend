@@ -64,3 +64,35 @@ model Mandal {
   panchayats                Panchayat[]
 }
 
+model PanchayatiProfile {
+  id                       String     @id @default(uuid())
+  area                     String?
+  population               String?
+  numberOfHabitations      String?
+  houseHolds               String?
+  numberOfEmployees        String?
+  waterSupplyTanks         String?
+  tapConnections           String?
+  roadLength               Float?
+  drainageLength           Float?
+  streetLights             String?
+  communityHalls           String?
+  sweepers                 String?
+  tricycles                String?
+  tractors                 String?
+  vans                     String?
+  foggingMachines          String?
+  cheruvulu                String?
+  coconutTrees             String?
+  assessmentNumber         String?
+  sanitationMaterials      String?
+  panchayatiShops          String?
+  otherAssets              String?
+
+  // Foreign keys without explicit relation fields
+  userId                   String?    // Foreign key to User
+  panchayatId              String?    // Foreign key to Panchayat
+
+  createdAt                DateTime   @default(now())
+  updatedAt                DateTime   @updatedAt
+}

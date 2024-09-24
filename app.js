@@ -14,6 +14,7 @@ const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const panchayatRoutes = require('./routes/panchayat');
 const mandalRoutes = require('./routes/mandal');
+const panchayatiProfileRoutes = require('./routes/panchayatiProfile');
 
 // Import loggers from config
 const { httpLogger, appLogger } = require('./config/logger');
@@ -46,6 +47,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/panchayat', panchayatRoutes);
 app.use('/api/mandal', mandalRoutes);
+app.use('/api/panchayatiProfile', panchayatiProfileRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Handle 404 errors
