@@ -293,3 +293,77 @@
  *                         type: string
  *                         example: test_user
  */
+
+/**
+ * @swagger
+ * /api/user/v1/getUser:
+ *   get:
+ *     summary: Get the authenticated user's profile
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User profile retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User found successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       example: "12345"
+ *                     username:
+ *                       type: string
+ *                       example: "john_doe"
+ *                     fullName:
+ *                       type: string
+ *                       example: "John Doe"
+ *                     fatherName:
+ *                       type: string
+ *                       example: "Richard Doe"
+ *                     gender:
+ *                       type: string
+ *                       example: "Male"
+ *                     age:
+ *                       type: integer
+ *                       example: 30
+ *                     panchayatId:
+ *                       type: string
+ *                       example: "67890"
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: User not found
+ *       401:
+ *         description: Unauthorized access
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: Unauthorized access
+ */
