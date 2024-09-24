@@ -4,6 +4,8 @@
  *   post:
  *     summary: Register a new user
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -72,6 +74,8 @@
  *   post:
  *     summary: Login a user
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -125,6 +129,8 @@
  *   get:
  *     summary: Get a user by ID
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -163,6 +169,8 @@
  *   put:
  *     summary: Update a user by ID
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -222,6 +230,8 @@
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -251,6 +261,8 @@
  *   get:
  *     summary: Get all users with pagination
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: page
