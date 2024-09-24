@@ -116,6 +116,20 @@ exports.getUserById = async (req, res, next) => {
   }
 };
 
+// Get User
+exports.getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      throw new CustomError('User not found', 404);
+    }
+    res.status(200).json(response(200, true, 'User found successfully', user));
+  } catch (error) {
+    console.log(`Error in getUserById: ${error.message}`);
+    next(error);
+  }
+};
+
 // Update a user by ID
 exports.updateUserById = async (req, res, next) => {
   const { id } = req.params;
