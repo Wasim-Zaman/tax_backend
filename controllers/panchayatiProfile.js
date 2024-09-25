@@ -28,6 +28,12 @@ exports.createPanchayatiProfile = async (req, res, next) => {
       sanitationMaterials,
       panchayatiShops,
       otherAssets,
+      neighbouringPropertyNorth, // New field
+      inputHelperText, // New field
+      numberOfPrimarySchools, // New field
+      numberOfHighSchools, // New field
+      numberOfAnganwadiCenters, // New field
+      numberOfVillageClinics, // New field
     } = req.body;
 
     const newPanchayatiProfile = await PanchayatiProfile.create({
@@ -53,6 +59,12 @@ exports.createPanchayatiProfile = async (req, res, next) => {
       sanitationMaterials,
       panchayatiShops,
       otherAssets,
+      neighbouringPropertyNorth, // New field
+      inputHelperText, // New field
+      numberOfPrimarySchools, // New field
+      numberOfHighSchools, // New field
+      numberOfAnganwadiCenters, // New field
+      numberOfVillageClinics, // New field
       userId: req.user.id,
       panchayatId: req.user.panchayatId,
     });
@@ -122,8 +134,12 @@ exports.updatePanchayatiProfileById = async (req, res, next) => {
     sanitationMaterials,
     panchayatiShops,
     otherAssets,
-    userId,
-    panchayatId,
+    neighbouringPropertyNorth, // New field
+    inputHelperText, // New field
+    numberOfPrimarySchools, // New field
+    numberOfHighSchools, // New field
+    numberOfAnganwadiCenters, // New field
+    numberOfVillageClinics, // New field
   } = req.body;
 
   try {
@@ -151,12 +167,12 @@ exports.updatePanchayatiProfileById = async (req, res, next) => {
     if (sanitationMaterials) updateData.sanitationMaterials = sanitationMaterials;
     if (panchayatiShops) updateData.panchayatiShops = panchayatiShops;
     if (otherAssets) updateData.otherAssets = otherAssets;
-    if (userId) {
-      updateData.user = { connect: { id: userId } };
-    }
-    if (panchayatId) {
-      updateData.panchayat = { connect: { id: panchayatId } };
-    }
+    if (neighbouringPropertyNorth) updateData.neighbouringPropertyNorth = neighbouringPropertyNorth; // New field
+    if (inputHelperText) updateData.inputHelperText = inputHelperText; // New field
+    if (numberOfPrimarySchools) updateData.numberOfPrimarySchools = numberOfPrimarySchools; // New field
+    if (numberOfHighSchools) updateData.numberOfHighSchools = numberOfHighSchools; // New field
+    if (numberOfAnganwadiCenters) updateData.numberOfAnganwadiCenters = numberOfAnganwadiCenters; // New field
+    if (numberOfVillageClinics) updateData.numberOfVillageClinics = numberOfVillageClinics; // New field
 
     const updatedPanchayatiProfile = await PanchayatiProfile.updateById(id, updateData);
 

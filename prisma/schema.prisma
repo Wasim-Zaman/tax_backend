@@ -68,26 +68,32 @@ model PanchayatiProfile {
   id                       String     @id @default(uuid())
   area                     String?
   population               String?
-  numberOfHabitations      String?
-  houseHolds               String?
-  numberOfEmployees        String?
-  waterSupplyTanks         String?
-  tapConnections           String?
-  roadLength               Float?
-  drainageLength           Float?
-  streetLights             String?
-  communityHalls           String?
-  sweepers                 String?
-  tricycles                String?
-  tractors                 String?
-  vans                     String?
-  foggingMachines          String?
-  cheruvulu                String?
-  coconutTrees             String?
-  assessmentNumber         String?
-  sanitationMaterials      String?
-  panchayatiShops          String?
-  otherAssets              String?
+  numberOfHabitations      String?    // No of habitation
+  houseHolds               String?    // House Holds
+  numberOfEmployees        String?    // No of employees (including contact)
+  waterSupplyTanks         String?    // No of water Supply Tanks
+  tapConnections           String?    // No of Tap Connections
+  roadLength               Float?     // Length of Roads
+  drainageLength           Float?     // Length of Drainage
+  streetLights             String?    // No of Street Lights
+  communityHalls           String?    // No of Community Halls
+  sweepers                 String?    // No of Sweepers
+  tricycles                String?    // No of Tricycles
+  tractors                 String?    // No of Tractors
+  vans                     String?    // No of Vans
+  foggingMachines          String?    // No of Fogging Machines
+  cheruvulu                String?    // No of Cheruvulu
+  coconutTrees             String?    // No of Coconut Trees
+  assessmentNumber         String?    // No of Assessment Numbers
+  sanitationMaterials      String?    // Sanitation material if any
+  panchayatiShops          String?    // No of Panchayati Shops
+  neighbouringPropertyNorth String?   // Enter neighbouring property detail north
+  inputHelperText          String?    // Input Helper Text
+  otherAssets              String?    // Other Assets
+  numberOfPrimarySchools    String?    // No of Primary Schools
+  numberOfHighSchools       String?    // No of High Schools
+  numberOfAnganwadiCenters   String?    // No of Anganvadi Centers
+  numberOfVillageClinics     String?    // No of Village Clinics
 
   // Foreign keys without explicit relation fields
   userId                   String?    // Foreign key to User

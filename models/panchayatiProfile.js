@@ -8,7 +8,7 @@ class PanchayatiProfile {
     try {
       return await prisma.panchayatiProfile.findUnique({
         where: { id: id },
-        include: { user: true, panchayat: true }, // Include related User and Panchayat
+        include: { user: true, panchayat: true },
       });
     } catch (error) {
       console.error('Error finding PanchayatiProfile by id:', error);
@@ -16,12 +16,12 @@ class PanchayatiProfile {
     }
   }
 
-  //    Find by user id
+  // Find by user id
   static async findByUserId(userId) {
     try {
       return await prisma.panchayatiProfile.findMany({
         where: { userId: userId },
-        include: { user: true, panchayat: true }, // Include related User and Panchayat data
+        include: { user: true, panchayat: true },
       });
     } catch (error) {
       console.error('Error finding PanchayatiProfile by userId:', error);
@@ -56,12 +56,18 @@ class PanchayatiProfile {
           assessmentNumber: data.assessmentNumber,
           sanitationMaterials: data.sanitationMaterials,
           panchayatiShops: data.panchayatiShops,
+          neighbouringPropertyNorth: data.neighbouringPropertyNorth, // New field
+          inputHelperText: data.inputHelperText, // New field
           otherAssets: data.otherAssets,
+          numberOfPrimarySchools: data.numberOfPrimarySchools, // New field
+          numberOfHighSchools: data.numberOfHighSchools, // New field
+          numberOfAnganwadiCenters: data.numberOfAnganwadiCenters, // New field
+          numberOfVillageClinics: data.numberOfVillageClinics, // New field
           user: {
-            connect: { id: data.userId }, // Connect User relation
+            connect: { id: data.userId },
           },
           panchayat: {
-            connect: { id: data.panchayatId }, // Connect Panchayat relation
+            connect: { id: data.panchayatId },
           },
         },
         include: { user: true, panchayat: true },
@@ -82,12 +88,12 @@ class PanchayatiProfile {
           ...data,
           user: data.userId
             ? {
-                connect: { id: data.userId }, // Update User relation
+                connect: { id: data.userId },
               }
             : undefined,
           panchayat: data.panchayatId
             ? {
-                connect: { id: data.panchayatId }, // Update Panchayat relation
+                connect: { id: data.panchayatId },
               }
             : undefined,
         },
@@ -116,7 +122,7 @@ class PanchayatiProfile {
   static async getAll() {
     try {
       return await prisma.panchayatiProfile.findMany({
-        include: { user: true, panchayat: true }, // Include related User and Panchayat
+        include: { user: true, panchayat: true },
       });
     } catch (error) {
       console.error('Error finding all PanchayatiProfiles:', error);

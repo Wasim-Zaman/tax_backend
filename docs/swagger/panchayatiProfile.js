@@ -55,6 +55,24 @@
  *               panchayatId:
  *                 type: string
  *                 description: ID of the panchayat
+ *               neighbouringPropertyNorth:
+ *                 type: string
+ *                 description: Description of the northern neighboring property
+ *               inputHelperText:
+ *                 type: string
+ *                 description: Additional input helper text
+ *               numberOfPrimarySchools:
+ *                 type: integer
+ *                 description: Number of primary schools
+ *               numberOfHighSchools:
+ *                 type: integer
+ *                 description: Number of high schools
+ *               numberOfAnganwadiCenters:
+ *                 type: integer
+ *                 description: Number of Anganwadi centers
+ *               numberOfVillageClinics:
+ *                 type: integer
+ *                 description: Number of village clinics
  *     responses:
  *       201:
  *         description: PanchayatiProfile created successfully
@@ -120,6 +138,24 @@
  *                       area:
  *                         type: string
  *                         example: "Area Name"
+ *                       neighbouringPropertyNorth:
+ *                         type: string
+ *                         example: "North Side Description"
+ *                       inputHelperText:
+ *                         type: string
+ *                         example: "Helper text for input"
+ *                       numberOfPrimarySchools:
+ *                         type: integer
+ *                         example: 3
+ *                       numberOfHighSchools:
+ *                         type: integer
+ *                         example: 2
+ *                       numberOfAnganwadiCenters:
+ *                         type: integer
+ *                         example: 1
+ *                       numberOfVillageClinics:
+ *                         type: integer
+ *                         example: 4
  */
 
 /**
@@ -158,6 +194,24 @@
  *                     area:
  *                       type: string
  *                       example: "Area Name"
+ *                     neighbouringPropertyNorth:
+ *                       type: string
+ *                       example: "North Side Description"
+ *                     inputHelperText:
+ *                       type: string
+ *                       example: "Helper text for input"
+ *                     numberOfPrimarySchools:
+ *                       type: integer
+ *                       example: 3
+ *                     numberOfHighSchools:
+ *                       type: integer
+ *                       example: 2
+ *                     numberOfAnganwadiCenters:
+ *                       type: integer
+ *                       example: 1
+ *                     numberOfVillageClinics:
+ *                       type: integer
+ *                       example: 4
  */
 
 /**
@@ -202,10 +256,18 @@
  *                 type: string
  *               communityHalls:
  *                 type: string
- *               userId:
+ *               neighbouringPropertyNorth:
  *                 type: string
- *               panchayatId:
+ *               inputHelperText:
  *                 type: string
+ *               numberOfPrimarySchools:
+ *                 type: integer
+ *               numberOfHighSchools:
+ *                 type: integer
+ *               numberOfAnganwadiCenters:
+ *                 type: integer
+ *               numberOfVillageClinics:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: PanchayatiProfile updated successfully
@@ -229,6 +291,24 @@
  *                     area:
  *                       type: string
  *                       example: "Updated Area Name"
+ *                     neighbouringPropertyNorth:
+ *                       type: string
+ *                       example: "Updated North Side Description"
+ *                     inputHelperText:
+ *                       type: string
+ *                       example: "Updated helper text for input"
+ *                     numberOfPrimarySchools:
+ *                       type: integer
+ *                       example: 4
+ *                     numberOfHighSchools:
+ *                       type: integer
+ *                       example: 3
+ *                     numberOfAnganwadiCenters:
+ *                       type: integer
+ *                       example: 2
+ *                     numberOfVillageClinics:
+ *                       type: integer
+ *                       example: 5
  */
 
 /**
@@ -307,4 +387,22 @@
  *                       area:
  *                         type: string
  *                         example: "Area Name"
+ *                       neighbouringPropertyNorth:
+ *                         type: string
+ *                         example: "North Side Description"
+ *                       inputHelperText:
+ *                         type: string
+ *                         example: "Helper text for input"
+ *                       numberOfPrimarySchools:
+ *                         type: integer
+ *                         example: 3
+ *                       numberOfHighSchools:
+ *                         type: integer
+ *                         example: 2
+ *                       numberOfAnganwadiCenters:
+ *                         type: integer
+ *                         example: 1
+ *                       numberOfVillageClinics:
+ *                         type: integer
+ *                         example: 4
  */
